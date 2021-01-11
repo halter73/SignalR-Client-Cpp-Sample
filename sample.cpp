@@ -4,10 +4,23 @@
 #include "signalrclient/hub_connection_builder.h"
 #include "signalrclient/signalr_value.h"
 
+class logger : public signalr::log_writer
+{
+    // Inherited via log_writer
+    virtual void write(const std::string& entry) override
+    {
+        std::cout << entry;
+    }
+};
+
 int main()
 {
+    //std::string input;
+    //std::cin >> input;
     std::promise<void> start_task;
-    signalr::hub_connection connection = signalr::hub_connection_builder::create("http://localhost:5000/hub").build();
+    signalr::hub_connection connection = signalr::hub_connection_builder::create("http://localhost:5000/hub")
+        .with_logging(std::make_shared<logger>(), signalr::trace_level::all)
+        .build();
 
     connection.on("echo", [](const signalr::value& m)
     {
