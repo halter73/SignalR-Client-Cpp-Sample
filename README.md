@@ -4,7 +4,7 @@
 > $env:Path+=";C:\dev\microsoft\vcpkg\installed\x64-windows\bin"
 > mkdir build
 > cd build
-> cmake .. -D CMAKE_PREFIX_PATH="C:/dev/microsoft/vcpkg/installed/x64-windows/"
+> cmake .. -A x64 -D CMAKE_PREFIX_PATH="C:/dev/microsoft/vcpkg/installed/x64-windows/"
 > cmake --build .
 > .\Debug\sample.exe
 ```
