@@ -19,7 +19,7 @@ int main()
     //std::cin >> input;
     std::promise<void> start_task;
     signalr::hub_connection connection = signalr::hub_connection_builder::create("http://localhost:5000/hub")
-        .with_logging(std::make_shared<logger>(), signalr::trace_level::all)
+        .with_logging(std::make_shared<logger>(), signalr::trace_level::verbose)
         .build();
 
     connection.on("echo", [](const signalr::value& m)
