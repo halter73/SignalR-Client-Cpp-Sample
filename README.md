@@ -4,7 +4,7 @@
 > $env:Path+=";C:\dev\microsoft\vcpkg\installed\x64-windows\bin"
 > mkdir build
 > cd build
-> cmake .. -D CMAKE_PREFIX_PATH="C:/dev/microsoft/vcpkg/installed/x64-windows/"
+> cmake .. -DCMAKE_TOOLCHAIN_FILE="C:\dev\microsoft\vcpkg\scripts\buildsystems\vcpkg.cmake"
 > cmake --build . --config Release
-> .\Debug\sample.exe
+> .\Release\sample.exe
 ```
