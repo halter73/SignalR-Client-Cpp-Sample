@@ -22,9 +22,9 @@ int main()
         .with_logging(std::make_shared<logger>(), signalr::trace_level::verbose)
         .build();
 
-    connection.on("echo", [](const signalr::value& m)
+    connection.on("echo", [](const std::vector<signalr::value>& m)
     {
-        std::cout << m.as_array()[0].as_string() << std::endl;
+        std::cout << m[0].as_string() << std::endl;
     });
 
     connection.start([&start_task](std::exception_ptr exception) {
@@ -35,9 +35,8 @@ int main()
 
     std::promise<void> send_task;
     std::vector<signalr::value> arr { "hello world" };
-    signalr::value arg(arr);
 
-    connection.invoke("echo", arg, [&send_task](const signalr::value& value, std::exception_ptr exception) {
+    connection.invoke("echo", arr, [&send_task](const signalr::value& value, std::exception_ptr exception) {
         send_task.set_value();
     });
 
